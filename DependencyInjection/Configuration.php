@@ -9,8 +9,8 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('uvdesk_mailbox')
+        $treeBuilder = new TreeBuilder('knp_doctrine_behaviors');
+        $treeBuilder->getRootNode('uvdesk_mailbox')
             ->children()
                 ->node('emails', 'array')
                     ->children()
@@ -23,6 +23,7 @@ class Configuration implements ConfigurationInterface
                         ->children()
                             ->node('name', 'scalar')->cannotBeEmpty()->end()
                             ->node('enabled', 'boolean')->defaultFalse()->end()
+                            ->node('deleted', 'boolean')->defaultFalse()->end()
                             ->node('smtp_server', 'array')
                                 ->children()
                                     ->node('mailer_id', 'scalar')->defaultValue('default')->end()
